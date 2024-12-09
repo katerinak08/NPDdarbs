@@ -1,0 +1,41 @@
+def precu_uzskaite():
+    kopēja_suma = 0
+    preces = []
+
+    print("Laipni lūdzam! Ievadiet preces nosaukumu, cenu un daudzumu. Ievadiet '0', lai beigtu.")
+
+    while True:
+        nosaukums = input("Ievadi preces nosaukumu (vai '0', lai beigtu): ").strip()
+        if nosaukums == "0":
+            break
+
+        try:
+            cena = float(input("Ievadi cenu: ").strip())
+            if cena < 0:
+                print("Kļūda: Cena nevar būt negatīva. Mēģiniet vēlreiz.")
+                continue
+
+            daudzums = int(input("Ievadi daudzumu: ").strip())
+            if daudzums < 0:
+                print("Kļūda: Daudzums nevar būt negatīvs. Mēģiniet vēlreiz.")
+                continue
+
+            kopējā_preces_suma = cena * daudzums
+            kopēja_suma += kopējā_preces_suma
+            preces.append((nosaukums, cena, daudzums, kopējā_preces_suma))
+            print(f"Preces '{nosaukums}' kopējā summa: {kopējā_preces_suma:.2f} €")
+
+        except ValueError:
+            print("Kļūda: Nepareizi ievaddati. Lūdzu, mēģiniet vēlreiz.")
+
+    print("\n--- Pirkumu kopsavilkums ---")
+    print(f"{'Nr.':<4}{'Nosaukums':<15}{'Cena (€)':<10}{'Daudzums':<10}{'Kopā (€)':<10}")
+    print("-" * 50)
+    for i, (nosaukums, cena, daudzums, kopējā_preces_suma) in enumerate(preces, start=1):
+        print(f"{i:<4}{nosaukums:<15}{cena:<10.2f}{daudzums:<10}{kopējā_preces_suma:<10.2f}")
+    print("-" * 50)
+    print(f"Galīgā kopsumma: {kopēja_suma:.2f} €")
+    print("Paldies par lietošanu!")
+
+if __name__ == "__main__":
+    precu_uzskaite()
